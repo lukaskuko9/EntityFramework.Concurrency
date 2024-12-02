@@ -4,11 +4,12 @@ on:
     inputs:
       tags:
         description: 'Test scenario tags'
-  push:
-    branches: [ master ]
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: /Nuget
     environment: Production
     steps:
     - name: Check out Code 
