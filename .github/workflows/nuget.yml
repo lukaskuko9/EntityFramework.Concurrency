@@ -1,0 +1,45 @@
+name: nuget-build-deploy
+on:
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'Test scenario tags'
+  push:
+    branches: [ master ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: Production
+    steps:
+    - name: Check out Code 
+      uses: actions/checkout@v4
+      
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build dotnet 
+      run: dotnet build Nuget/EntityFramework.Concurrency.sln --configuration release --no-restore
+      
+    - name: Run Tests
+      run: dotnet test --configuration Release --no-build --verbosity normal
+      
+    - name: Package nuget
+      run: dotnet pack Nuget/EntityFramework.Concurrency.sln --configuration release -o:package 
+      
+   # - name: Push nuget to Nuget.Org
+    #  run: dotnet nuget push package/*.nupkg --api-key ${{secrets.NUGET_ORG_PUBLISH_KEY}} --source https://api.nuget.org/v3/index.json
+
+  #  - name: Push Nupkg to GitHub Packages
+   #      # You may pin to the exact commit or the version.
+   #       # uses: tanaka-takayoshi/nuget-publish-to-github-packages-action@462b6006e5c90f732d030b0ace2c3e7ee9d550bc
+  #    uses: tanaka-takayoshi/nuget-publish-to-github-packages-action@v2.1
+   #   with:
+    #    nupkg-path:  'package/*.nupkg'
+    #    repo-owner:  'lukaskuko9'
+   #     gh-user:  'lukaskuko9'
+    #   token:  ${{secrets.NUGET_GITHUB_TOKEN}}
+
+   # - name: Push generated package to GitHub registry
+   #   run: dotnet nuget push ./package/*.nupkg -s $NUGET_SOURCE --api-key ${{secrets.NUGET_DEPLOY_TOKEN}}
+   #   env:
+   #     NUGET_SOURCE: "https://nuget.pkg.github.com/lukaskuko9/index.json"
