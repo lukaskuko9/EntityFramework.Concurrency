@@ -2,8 +2,8 @@ name: nuget-publish
 on:
   workflow_dispatch:
     inputs:
-      artifactId:
-        description: Artifact ID
+      runId:
+        description: Run ID
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,11 +12,13 @@ jobs:
     - name: Download a Build Artifact
       uses: actions/download-artifact@v4.1.8
       with:
+        name:
+          "PessimisticConcurrency.Abstractions"
         run-id:
-          ${{ inputs.artifactId }}
+          ${{ inputs.runId }}
         github-token:
           ${{ secrets.GITHUB_TOKEN }}
-        
+
     - name: Check out Code 
       uses: actions/checkout@v4
       
