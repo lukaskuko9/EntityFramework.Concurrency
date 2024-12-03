@@ -14,6 +14,8 @@ jobs:
       with:
         run-id:
           ${{ inputs.artifactId }}
+        github-token:
+          ${{ secrets.GITHUB_TOKEN }}
         
     - name: Check out Code 
       uses: actions/checkout@v4
