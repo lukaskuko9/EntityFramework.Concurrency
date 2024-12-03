@@ -23,7 +23,7 @@ jobs:
       run: cd Nuget
 
     - name: List
-      uses: ls
+      run: ls
       
     - name: Restore dependencies
       run: dotnet restore
