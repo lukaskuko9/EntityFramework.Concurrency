@@ -24,28 +24,16 @@ jobs:
       
     - name: Run Tests
       run: dotnet test --configuration Release --no-build --verbosity normal
-
-    - name: Get CSProj Version
-      id: PessimisticConcurrency_Abstractions
-      uses: KageKirin/get-csproj-version@v1.0.0
-      with:
-        file: ./Nuget/PessimisticConcurrency.Abstractions/PessimisticConcurrency.Abstractions.csproj
-            
-    - name: Get CSProj Version
-      id: PessimisticConcurrency
-      uses: KageKirin/get-csproj-version@v1.0.0
-      with:
-        file: ./Nuget/PessimisticConcurrency/PessimisticConcurrency.csproj
     
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.4.3
       with:
-        name: "PessimisticConcurrency.Abstractions.${{ steps.PessimisticConcurrency_Abstractions.outputs.version }}"
+        name: "PessimisticConcurrency.Abstractions"
         path: .
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.4.3
       with:
-        name: "PessimisticConcurrency.${{ steps.PessimisticConcurrency.outputs.version }}"
+        name: "PessimisticConcurrency"
         path: .
 
