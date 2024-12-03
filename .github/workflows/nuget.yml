@@ -13,7 +13,7 @@ jobs:
       uses: actions/download-artifact@v4.1.8
       with:
         run-id:
-          ${{ github.event.inputs.artifactId }}
+          ${{ inputs.artifactId }}
         
     - name: Check out Code 
       uses: actions/checkout@v4
