@@ -29,7 +29,9 @@ jobs:
       run: dotnet pack Nuget/EntityFramework.Concurrency.sln --configuration release -o:package 
       
     - name: Push nuget to Nuget.Org
-      run: dotnet nuget push */*.nupkg --api-key ${{ secrets.NUGET_API_SECRET }} --source https://api.nuget.org/v3/index.json
+      env:
+        TOKEN: ${{ secrets.NUGET_API_SECRET }}
+      run: dotnet nuget push */*.nupkg --api-key $TOKEN --source https://api.nuget.org/v3/index.json
 
   #  - name: Push Nupkg to GitHub Packages
    #      # You may pin to the exact commit or the version.
