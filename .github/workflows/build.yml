@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: $GITHUB_WORKSPACE
+        working-directory: ./Nuget/
     steps:
     - name: Check out Code 
       uses: actions/checkout@v4
@@ -18,9 +18,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
             
-    - name: Change directory
-      run: cd Nuget
-      
     - name: Build dotnet 
       run: dotnet build EntityFramework.Concurrency.sln --configuration release --no-restore
       
