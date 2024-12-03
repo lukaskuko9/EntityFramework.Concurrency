@@ -22,8 +22,8 @@ jobs:
     - name: Change directory
       run: cd Nuget
 
-    - name: Check out Code 
-      uses: actions/checkout@v4
+    - name: List
+      uses: ls
       
     - name: Restore dependencies
       run: dotnet restore
