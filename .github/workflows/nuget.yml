@@ -18,15 +18,12 @@ jobs:
           ${{ inputs.runId }}
         github-token:
           ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Change directory
-      run: cd Nuget
-
+          
     - name: List
       run: ls
       
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore Nuget/
       
     - name: Build dotnet 
       run: dotnet build Nuget/EntityFramework.Concurrency.sln --configuration release --no-restore
