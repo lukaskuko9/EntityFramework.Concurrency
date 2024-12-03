@@ -19,6 +19,9 @@ jobs:
         github-token:
           ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Change directory
+      run: cd Nuget
+
     - name: Check out Code 
       uses: actions/checkout@v4
       
