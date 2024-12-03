@@ -11,13 +11,15 @@ jobs:
     defaults:
       run:
         working-directory: $GITHUB_WORKSPACE
-    environment: Production
     steps:
     - name: Check out Code 
       uses: actions/checkout@v4
       
     - name: Restore dependencies
       run: dotnet restore
+            
+    - name: Change directory
+      run: cd Nuget
       
     - name: Build dotnet 
       run: dotnet build EntityFramework.Concurrency.sln --configuration release --no-restore
