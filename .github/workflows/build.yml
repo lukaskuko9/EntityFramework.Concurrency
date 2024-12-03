@@ -40,12 +40,12 @@ jobs:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.4.3
       with:
-        name: ${{ steps.PessimisticConcurrency_Abstractions.outputs.version }}
+        name: "PessimisticConcurrency.Abstractions.${{ steps.PessimisticConcurrency_Abstractions.outputs.version }}"
         path: .
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.4.3
       with:
-        name: ${{ steps.PessimisticConcurrency.outputs.version }}
+        name: "PessimisticConcurrency.${{ steps.PessimisticConcurrency.outputs.version }}"
         path: .
 
