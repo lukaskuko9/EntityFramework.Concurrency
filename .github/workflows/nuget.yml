@@ -5,7 +5,7 @@ on:
       runId:
         description: Run ID
 jobs:
-  build:
+  publish-nugets:
     runs-on: ubuntu-latest
     environment: Production
     steps:
@@ -18,24 +18,18 @@ jobs:
           ${{ inputs.runId }}
         github-token:
           ${{ secrets.GITHUB_TOKEN }}
-          
-    - name: List
-      run: ls
-      
+
     - name: Restore dependencies
       run: dotnet restore Nuget/
       
     - name: Build dotnet 
       run: dotnet build Nuget/EntityFramework.Concurrency.sln --configuration release --no-restore
       
-    - name: Run Tests
-      run: dotnet test --configuration Release --no-build --verbosity normal
-      
     - name: Package nuget
       run: dotnet pack Nuget/EntityFramework.Concurrency.sln --configuration release -o:package 
       
-   # - name: Push nuget to Nuget.Org
-    #  run: dotnet nuget push package/*.nupkg --api-key ${{secrets.NUGET_ORG_PUBLISH_KEY}} --source https://api.nuget.org/v3/index.json
+    - name: Push nuget to Nuget.Org
+      run: dotnet nuget push package/*.nupkg --source https://api.nuget.org/v3/index.json
 
   #  - name: Push Nupkg to GitHub Packages
    #      # You may pin to the exact commit or the version.
